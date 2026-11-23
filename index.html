@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#9be7c4" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <title>Pixel Pomodoro</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pixelify+Sans:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="intro" id="intro" aria-hidden="true">
+      <div class="intro-stars"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="intro-cat">=^.^=</div>
+      <div class="intro-logo">PIXEL POMODORO</div>
+    </div>
+    <div class="fx" aria-hidden="true">
+      <i
+        class="fl"
+        style="left: 6%; animation-duration: 9s; animation-delay: -0s"
+      ></i
+      ><i
+        class="fl"
+        style="left: 18%; animation-duration: 12s; animation-delay: -2s"
+      ></i
+      ><i
+        class="fl sp"
+        style="left: 30%; animation-duration: 15s; animation-delay: -4s"
+      ></i
+      ><i
+        class="fl"
+        style="left: 44%; animation-duration: 18s; animation-delay: -6s"
+      ></i
+      ><i
+        class="fl"
+        style="left: 57%; animation-duration: 9s; animation-delay: -8s"
+      ></i
+      ><i
+        class="fl sp"
+        style="left: 70%; animation-duration: 12s; animation-delay: -10s"
+      ></i
+      ><i
+        class="fl"
+        style="left: 82%; animation-duration: 15s; animation-delay: -12s"
+      ></i
+      ><i
+        class="fl"
+        style="left: 93%; animation-duration: 18s; animation-delay: -14s"
+      ></i>
+    </div>
+    <main class="app">
+      <div class="hud" id="hud">
+        <span><i class="ph"></i><i class="ph"></i><i class="ph"></i></span
+        ><b>LV<span id="lv">1</span></b>
+        <div class="meter"><i id="xpf"></i></div>
+        <b class="stars"><i class="ps"></i><span id="stars">0</span></b>
+      </div>
+
+      <section class="screen on" id="s-home">
+        <h1 class="logo">
+          <span style="--c: #ff8fb1; --i: 0">P</span
+          ><span style="--c: #ffe27a; --i: 1">I</span
+          ><span style="--c: #9be7c4; --i: 2">X</span
+          ><span style="--c: #8fd3ff; --i: 3">E</span
+          ><span style="--c: #c9b6ff; --i: 4">L</span><br /><span
+            style="--c: #ff8fb1; --i: 5"
+            >P</span
+          ><span style="--c: #ffe27a; --i: 6">O</span
+          ><span style="--c: #9be7c4; --i: 7">M</span
+          ><span style="--c: #8fd3ff; --i: 8">O</span
+          ><span style="--c: #c9b6ff; --i: 9">D</span
+          ><span style="--c: #ff8fb1; --i: 10">O</span
+          ><span style="--c: #ffe27a; --i: 11">R</span
+          ><span style="--c: #9be7c4; --i: 12">O</span><br />
+        </h1>
+        <div class="tc"><span class="rib">MISI FOKUS</span></div>
+        <div class="herow">
+          <i class="spk" style="left: -6%; top: 12%"></i
+          ><i
+            class="spk"
+            style="right: -4%; top: 30%; animation-delay: 0.5s"
+          ></i
+          ><img
+            class="hero"
+            src="images/clawd.png"
+            alt="Clawd si detektif pixel"
+          />
+          <div class="shd"></div>
+        </div>
+        <div class="say">
+          <b class="tag">NEWT</b
+          ><img
+            src="images/newt.png"
+            alt="Newt"
+          />
+          <p id="say"></p>
+        </div>
+        <div class="daily-card" id="daily-card">
+          <b>MISSI HARI INI</b>
+          <span id="daily-challenge">Selesaikan 4 sesi fokus</span>
+          <div class="daily-progress"><i id="daily-progress"></i></div>
+        </div>
+        <div class="quest-card" id="quest-card">
+          <div class="quest-head">
+            <b>DAILY QUEST</b>
+            <span id="quest-reward">+120 XP</span>
+          </div>
+          <div id="quest-list" class="quest-list"></div>
+        </div>
+        <div class="evolution-card" id="evolution-card">
+          <img id="evolution-img" src="images/newt.png" alt="Evolusi teman" />
+          <div>
+            <b id="evolution-name">Newt Tingkat 1</b>
+            <span id="evolution-progress">0 / 5 XP evolusi</span>
+            <div class="evolution-xp"><i id="evolution-xp"></i></div>
+          </div>
+        </div>
+        <button class="btn" id="go-pick"><i class="tri"></i>MULAI</button>
+      </section>
+
+      <section class="screen" id="s-hub">
+        <div class="hub">
+          <div class="card">
+            <div class="tab on" id="t-apa">
+              <span class="rib">APA ITU POMODORO?</span>
+              <p>
+                Pomodoro adalah teknik mengatur waktu belajar buatan Francesco
+                Cirillo pada akhir 1980-an. Namanya dari kata Italia untuk
+                tomat, karena Cirillo dulu memakai pewaktu dapur berbentuk
+                tomat.
+              </p>
+              <p>
+                Idenya sederhana: fokus sebentar, istirahat sebentar. Tugas
+                besar terasa kecil dan otak dapat jeda sebelum lelah.
+              </p>
+              <div class="facts">
+                <div class="fact" style="background: var(--pink2)">
+                  <b>25</b>menit fokus
+                </div>
+                <div class="fact" style="background: var(--mint)">
+                  <b>5</b>menit istirahat
+                </div>
+                <div class="fact" style="background: var(--butter)">
+                  <b>4x</b>lalu istirahat panjang
+                </div>
+              </div>
+              <button class="btn" id="to-cara">LANJUT: CARA MAIN</button>
+            </div>
+            <div class="tab" id="t-cara">
+              <span class="rib">CARA MAIN</span>
+              <ol class="steps">
+                <li>Pilih satu tugas saja.</li>
+                <li>Fokus penuh selama satu sesi.</li>
+                <li>Istirahat 5 menit: minum, regangkan badan.</li>
+                <li>Setelah 4 sesi, istirahat panjang 15 sampai 30 menit.</li>
+              </ol>
+              <div class="say sm">
+                <b class="tag">NEWT</b
+                ><img
+                  src="images/newt.png"
+                  alt="Newt"
+                />
+                <p>
+                  Kalau pikiran melantur, catat dulu di kertas lalu urus nanti
+                  saat istirahat.
+                </p>
+              </div>
+              <button class="btn mint" id="to-teman">
+                LANJUT: PILIH TEMAN
+              </button>
+            </div>
+            <div class="tab" id="t-teman">
+              <span class="rib">PILIH TEMAN</span>
+              <div class="grid" id="buddies">
+                <button
+                  class="pick"
+                  data-k="sherlock"
+                  style="--c: #ffc2d6"
+                  aria-pressed="false"
+                >
+                  <img
+                    src="images/detektif.png"
+                    alt="Detektif"
+                  />Detektif
+                </button>
+                <button
+                  class="pick"
+                  data-k="kopi"
+                  style="--c: #bff3dc"
+                  aria-pressed="false"
+                >
+                  <img
+                    src="images/kopi.png"
+                    alt="Kopi"
+                  />Kopi
+                </button>
+                <button
+                  class="pick"
+                  data-k="pop"
+                  style="--c: #fff0a8"
+                  aria-pressed="false"
+                >
+                  <img
+                    src="images/pop-cat.jpg"
+                    alt="Pop Cat"
+                  />Pop Cat
+                </button>
+                <button
+                  class="pick"
+                  data-k="finn"
+                  style="--c: #bfe6ff"
+                  aria-pressed="false"
+                >
+                  <img
+                    src="images/finn.png"
+                    alt="Finn"
+                  />Finn
+                </button>
+                <button
+                  class="pick"
+                  data-k="pisang"
+                  style="--c: #e2d6ff"
+                  aria-pressed="false"
+                >
+                  <img
+                    src="images/banana-cat.png"
+                    alt="Pisang"
+                  />Pisang
+                </button>
+                <button
+                  class="pick"
+                  data-k="spidey"
+                  style="--c: #ffc2d6"
+                  aria-pressed="false"
+                >
+                  <img
+                    src="images/spidey.png"
+                    alt="Spidey"
+                  />Spidey
+                </button>
+                <button
+                  class="pick"
+                  data-k="ayun"
+                  style="--c: #bff3dc"
+                  aria-pressed="false"
+                >
+                  <img
+                    src="images/spidey-swing.png"
+                    alt="Ayun"
+                  />Ayun
+                </button>
+              </div>
+              <div class="say sm">
+                <b class="tag" id="hn">PILIH DULU</b
+                ><img
+                  id="hp"
+                  alt=""
+                  src="images/newt.png"
+                />
+                <p id="hs">
+                  Ketuk satu karakter. Latar belakang ikut berganti sesuai
+                  pilihanmu.
+                </p>
+              </div>
+              <p style="margin: 14px 0 0">Durasi belajar (menit)</p>
+              <div class="chips" id="durs">
+                <button class="chip" data-m="15" aria-pressed="false">
+                  15
+                </button>
+                <button class="chip" data-m="25" aria-pressed="true">25</button>
+                <button class="chip" data-m="45" aria-pressed="false">
+                  45
+                </button>
+              </div>
+              <div class="mission">
+                <label for="task-input">TUGAS AKTIF</label>
+                <input id="task-input" maxlength="80" placeholder="Contoh: kerjain laporan..." />
+                <div class="task-checklist">
+                  <div class="task-add">
+                    <input id="checklist-input" maxlength="60" placeholder="Tambah langkah kecil..." />
+                    <button type="button" id="checklist-add">+</button>
+                  </div>
+                  <div id="checklist" class="checklist"></div>
+                </div>
+                <div class="target-row">
+                  <label for="target-input">Target harian</label>
+                  <input id="target-input" type="number" min="1" max="12" value="4" />
+                  <span>sesi</span>
+                </div>
+              </div>
+              <div class="quick-stats">
+                <div><b id="today-count">0</b><span>Hari ini</span></div>
+                <div><b id="streak-count">0</b><span>Streak</span></div>
+                <div><b id="level-preview">LV1</b><span>Level</span></div>
+              </div>
+              <button class="btn" id="go-timer" disabled>GASKEN!</button>
+            </div>
+            <div class="tab" id="t-statistik">
+              <span class="rib">STATISTIK & PENGATURAN</span>
+              <div class="week-card">
+                <b>AKTIVITAS 7 HARI</b>
+                <div class="week-bars" id="week-bars"></div>
+              </div>
+              <div class="hidden-achievements">
+                <b>PENCAPAIAN TERSEMBUNYI</b>
+                <div id="secret-list" class="secret-list"></div>
+              </div>
+              <div class="settings-grid">
+                <label class="setting">
+                  <span>Mulai otomatis</span>
+                  <input id="auto-mode" type="checkbox" />
+                </label>
+                <label class="setting">
+                  <span>Notifikasi</span>
+                  <button type="button" class="mini-btn" id="notify-btn">IZINKAN</button>
+                </label>
+                <label class="setting setting-wide">
+                  <span>Getar HP</span>
+                  <input id="vibrate-toggle" type="checkbox" checked />
+                </label>
+                <label class="setting setting-wide">
+                  <span>Volume suara</span>
+                  <input id="volume-range" type="range" min="0" max="100" value="55" />
+                </label>
+              </div>
+              <div class="personalize">
+                <b>PERSONALISASI</b>
+                <div class="theme-row" id="theme-row">
+                  <button type="button" class="theme-dot pink on" data-theme="pink" aria-label="Tema pink"></button>
+                  <button type="button" class="theme-dot mint" data-theme="mint" aria-label="Tema mint"></button>
+                  <button type="button" class="theme-dot dark" data-theme="dark" aria-label="Tema gelap"></button>
+                  <button type="button" class="theme-dot sky" data-theme="sky" aria-label="Tema biru"></button>
+                </div>
+                <div class="custom-durations">
+                  <label>Fokus <input id="focus-min" type="number" min="1" max="120" value="25" /></label>
+                  <label>Istirahat <input id="break-min" type="number" min="1" max="60" value="5" /></label>
+                </div>
+                <label class="mood-row">Mood sekarang
+                  <button type="button" data-mood="😊">😊</button>
+                  <button type="button" data-mood="😌">😌</button>
+                  <button type="button" data-mood="🔥">🔥</button>
+                  <button type="button" data-mood="😴">😴</button>
+                </label>
+                <button type="button" class="mini-btn export-btn" id="export-btn">EXPORT DATA CSV</button>
+              </div>
+              <div class="calendar-card">
+                <b>KALENDER FOKUS</b>
+                <div class="calendar-grid" id="calendar-grid"></div>
+              </div>
+              <div class="achievement-list" id="achievement-list"></div>
+            </div>
+          </div>
+          <nav class="side" id="nav">
+            <button class="nv" data-t="home" aria-pressed="false">HOME</button>
+            <button class="nv" data-t="apa" aria-pressed="true">POMODORO</button>
+            <button class="nv" data-t="cara" aria-pressed="false">CARA</button>
+            <button class="nv" data-t="teman" aria-pressed="false">
+              TEMAN
+            </button>
+            <button class="nv" data-t="statistik" aria-pressed="false">
+              DATA
+            </button>
+          </nav>
+        </div>
+      </section>
+
+      <section class="screen" id="s-timer">
+        <div class="tc"><span class="rib" id="mode">BELAJAR</span></div>
+        <div class="active-task" id="active-task">Tugas aktif belum dipilih</div>
+        <div class="quest-float" id="quest-float">
+          <span>QUEST</span>
+          <b id="quest-float-text">Selesaikan 1 sesi</b>
+        </div>
+        <button type="button" class="ultra-btn" id="ultra-btn" aria-pressed="false">FOCUS MODE</button>
+        <div class="stage">
+          <img
+            id="main-img"
+            src="images/wizard.png"
+            alt="Penyihir belajar di depan laptop"
+          />
+          <div class="bubble" id="bubble">Fokus dulu ya!</div>
+          <div class="buddy" id="buddy">
+            <img id="buddy-img" alt="Teman belajar" src="" />
+          </div>
+        </div>
+        <div class="time" id="time" role="timer" aria-live="off">25:00</div>
+        <div class="seg" id="seg">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
+          ><i></i><i></i>
+        </div>
+        <div class="music" id="music">
+          <b>PILIH SUARA ISTIRAHAT</b>
+          <div class="tracks" id="tracks">
+            <button class="track on" data-track="rain" aria-pressed="true">HUJAN</button>
+            <button class="track" data-track="lofi" aria-pressed="false">LO-FI</button>
+            <button class="track" data-track="ocean" aria-pressed="false">OMBAK</button>
+            <button class="track" data-track="fire" aria-pressed="false">API</button>
+            <button class="track" data-track="wind" aria-pressed="false">ANGIN</button>
+            <button class="track" data-track="cafe" aria-pressed="false">KAFE</button>
+          </div>
+          <button class="music-toggle" id="music-toggle" aria-pressed="false">
+            PUTAR MUSIK
+          </button>
+          <label class="alarm-select">
+            Alarm
+            <select id="alarm-select">
+              <option value="pixel">Pixel</option>
+              <option value="bell">Bel lembut</option>
+              <option value="chime">Chime</option>
+            </select>
+          </label>
+        </div>
+        <div class="row">
+          <button class="btn butter" id="pause">JEDA</button>
+          <button class="btn mint" id="reset">STOP</button>
+        </div>
+      </section>
+    </main>
+
+    <div
+      class="ov"
+      id="ov"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="ov-t"
+    >
+      <div class="card">
+        <img class="ovi" id="ov-img" alt="" src="" />
+        <h1 id="ov-t">Sesi selesai!</h1>
+        <p id="ov-p">Kerja bagus.</p>
+        <button class="btn" id="ov-a">Istirahat +5 menit</button>
+        <button class="btn mint" id="ov-b">Lanjut belajar</button>
+      </div>
+    </div>
+    <div class="ambient-live" id="ambient-live" aria-hidden="true"></div>
+    <div class="reward-toast" id="reward-toast" role="status" aria-live="polite">
+      <b id="reward-title">Pencapaian terbuka!</b>
+      <span id="reward-text">Kamu hebat!</span>
+    </div>
+    <script src="script.js" defer></script>
+  </body>
+</html>
